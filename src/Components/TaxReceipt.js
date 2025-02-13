@@ -30,7 +30,11 @@ const TaxReceipt = ({ data }) => {
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("TaxReceipt.pdf");
+      const regNo = data.registrationNo || "UNKNOWN"; // Fallback if empty
+  const lastFourDigits = regNo.slice(-4); // Get last 4 digits
+  const fileName = `${lastFourDigits}.pdf`; // Dynamic file name
+  
+  pdf.save(fileName);
     });
   };
 
@@ -52,7 +56,7 @@ const TaxReceipt = ({ data }) => {
           style={{
             position: "absolute",
             top: "0%",
-            fontSize: "20px",
+            fontSize: "18px",
             fontWeight: "bold",
             color: "rgba(0, 0, 0, 0.2)",
             zIndex: -1,
@@ -111,7 +115,7 @@ const TaxReceipt = ({ data }) => {
           Checkpost Tax e-Receipt
         </h3>
 
-        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" }}>
+        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" ,paddingLeft:"10px" }}>
           <p><strong>Registration No.:</strong> {data.registrationNo}</p>
           <p><strong>Receipt No.:</strong> {data.receiptNo}</p>
           <p><strong>Payment Date:</strong> {data.paymentDate}</p>
@@ -127,7 +131,7 @@ const TaxReceipt = ({ data }) => {
           }}
         >
           {/* Left Section */}
-          <div style={{ width: "50%", textAlign: "left" }}>
+          <div style={{ width: "50%", textAlign: "left" ,paddingLeft:"10px" }}>
             <p><strong>Vehicle Type:</strong> {data.vehicleType}</p>
             <p><strong>Mobile No.:</strong> {data.mobileNo}</p>
             <p><strong>Sleeper Cap.:</strong>{data.seatCapacity}</p>
