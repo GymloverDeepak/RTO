@@ -89,12 +89,12 @@ const UpTaxReceipt = ({ data }) => {
           alt="Watermark"
           style={{
             position: "absolute",
-            width: "60%",
+            width: "40%",
             height: "auto",
             left: "50%",
             top: "5%", // Moved to the top middle
             transform: "translateX(-50%)",
-            opacity: 0.3, // Darker watermark
+            opacity: 0.5, // Darker watermark
             zIndex: -1,
           }}
         />

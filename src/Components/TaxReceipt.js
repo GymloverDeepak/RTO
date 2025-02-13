@@ -89,7 +89,7 @@ const TaxReceipt = ({ data }) => {
           alt="Watermark"
           style={{
             position: "absolute",
-            width: "60%",
+            width: "50%",
             height: "auto",
             left: "50%",
             top: "5%", // Moved to the top middle
