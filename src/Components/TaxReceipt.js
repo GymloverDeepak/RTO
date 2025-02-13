@@ -6,7 +6,20 @@ import { QRCodeCanvas } from "qrcode.react";
 
 const TaxReceipt = ({ data }) => {
   const pdfRef = useRef();
-
+  const formatReceivedDate = (dateString) => {
+    const date = new Date(dateString);
+  
+    return date.toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).replace(",", "");
+  };
+  const taxStartDate = formatReceivedDate(data.taxStartDate);
+  const taxEndDate = formatReceivedDate(data.taxEndDate);
   const downloadPDF = () => {
     const input = pdfRef.current;
 
@@ -117,8 +130,8 @@ const TaxReceipt = ({ data }) => {
           <div style={{ width: "50%", textAlign: "left" }}>
             <p><strong>Vehicle Type:</strong> {data.vehicleType}</p>
             <p><strong>Mobile No.:</strong> {data.mobileNo}</p>
-            <p><strong>Sleeper Cap.:</strong> 0</p>
-            <p><strong>Bank Ref. No.:</strong> IK5371493</p>
+            <p><strong>Sleeper Cap.:</strong>{data.seatCapacity}</p>
+            <p><strong>Bank Ref. No.:</strong>{data.bankRefrelNo}</p>
             <p><strong>Service Type:</strong> Ordinary</p>
             <p><strong>Permit Type:</strong> -</p>
           </div>
@@ -126,10 +139,10 @@ const TaxReceipt = ({ data }) => {
           {/* Right Section */}
           <div style={{ width: "50%", textAlign: "left" }}>
             <p><strong>Chassis No.:</strong> {data.chassisNo}</p>
-            <p><strong>Tax Mode:</strong> DAYS</p>
-            <p><strong>Vehicle Class:</strong> BUS</p>
+            <p><strong>Tax Mode:</strong>{data.taxMode}</p>
+            <p><strong>Vehicle Class:</strong>{data.vehicleClass}</p>
             <p><strong>Checkpost Name:</strong> GURUGRAM</p>
-            <p><strong>Seat Cap(Ex.Driver):</strong> 37</p>
+            <p><strong>Seat Cap(Ex.Driver):</strong> {data.seatCapacity}</p>
             <p><strong>Payment Mode:</strong> ONLINE</p>
           </div>
         </div>
@@ -154,7 +167,7 @@ const TaxReceipt = ({ data }) => {
           <tbody>
             <tr>
               <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax ({data.taxStartDate} TO {data.taxEndDate})
+                MV Tax ({taxStartDate} TO {taxEndDate})
               </td>
               <td style={{ padding: "4px" }}>{data.taxAmount}</td>
               <td style={{ padding: "4px" }}>{data.fineAmount}</td>

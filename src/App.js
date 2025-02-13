@@ -1,5 +1,6 @@
 import './App.css';
 import TaxReceipt from './Components/TaxReceipt';
+import TaxReceiptForm from './Components/TaxReceiptForm';
 
 function App() {
   const taxData = {
@@ -27,7 +28,8 @@ function App() {
 
   return (
     <div className="App">
-    <TaxReceipt data={taxData} />
+    {/* <TaxReceipt data={taxData} /> */}
+    <TaxReceiptForm/>
     </div>
   );
 }
