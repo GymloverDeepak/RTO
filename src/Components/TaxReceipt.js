@@ -56,7 +56,7 @@ const TaxReceipt = ({ data }) => {
           style={{
             position: "absolute",
             top: "0%",
-            fontSize: "18px",
+            fontSize: "19px",
             fontWeight: "bold",
             color: "rgba(0, 0, 0, 0.2)",
             zIndex: -1,
@@ -75,7 +75,7 @@ const TaxReceipt = ({ data }) => {
           {[...Array(20)].map((_, index) => (
             <div key={index} style={{ width: "100%", display: "flex" }}>
               <span style={{ letterSpacing: "1px" }}>
-                {data.registrationNo} / {data.paymentDate}&nbsp;&nbsp;
+                {data.registrationNo} / {data.paymentDate}&nbsp;&nbsp;&nbsp;&nbsp;
               </span>
               <span style={{ letterSpacing: "1px" }}>
                 {data.registrationNo} / {data.paymentDate}
@@ -116,10 +116,10 @@ const TaxReceipt = ({ data }) => {
         </h3>
 
         <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" ,paddingLeft:"10px" }}>
-          <p><strong>Registration No.:</strong> {data.registrationNo}</p>
-          <p><strong>Receipt No.:</strong> {data.receiptNo}</p>
-          <p><strong>Payment Date:</strong> {data.paymentDate}</p>
-          <p><strong>Owner Name:</strong> {data.ownerName}</p>
+          <p><strong>Registration No :</strong>&nbsp; {data.registrationNo}</p>
+          <p><strong>Receipt No :</strong> &nbsp;{data.receiptNo}</p>
+          <p><strong>Payment Date :</strong>&nbsp; {data.paymentDate}</p>
+          <p><strong>Owner Name :</strong> &nbsp;{data.ownerName}</p>
         </div>
 
         <div
@@ -132,12 +132,12 @@ const TaxReceipt = ({ data }) => {
         >
           {/* Left Section */}
           <div style={{ width: "50%", textAlign: "left" ,paddingLeft:"10px" }}>
-            <p><strong>Vehicle Type:</strong> {data.vehicleType}</p>
-            <p><strong>Mobile No.:</strong> {data.mobileNo}</p>
-            <p><strong>Sleeper Cap.:</strong>{data.seatCapacity}</p>
+            <p><strong>Vehicle Type:</strong> &nbsp;{data.vehicleType}</p>
+            <p><strong>Mobile No.:</strong> &nbsp;{data.mobileNo}</p>
+            <p><strong>Sleeper Cap.:</strong>&nbsp;{data.seatCapacity}</p>
             <p><strong>Bank Ref. No.:</strong>{data.bankRefrelNo}</p>
             <p><strong>Service Type:</strong> Ordinary</p>
-            <p><strong>Permit Type:</strong> -</p>
+            <p><strong>Permit Type:</strong> &nbsp;</p>
           </div>
 
           {/* Right Section */}
@@ -145,7 +145,7 @@ const TaxReceipt = ({ data }) => {
             <p><strong>Chassis No.:</strong> {data.chassisNo}</p>
             <p><strong>Tax Mode:</strong>{data.taxMode}</p>
             <p><strong>Vehicle Class:</strong>{data.vehicleClass}</p>
-            <p><strong>Checkpost Name:</strong> GURUGRAM</p>
+            <p><strong>Checkpost Name:</strong>{data.checkpostName}</p>
             <p><strong>Seat Cap(Ex.Driver):</strong> {data.seatCapacity}</p>
             <p><strong>Payment Mode:</strong> ONLINE</p>
           </div>
