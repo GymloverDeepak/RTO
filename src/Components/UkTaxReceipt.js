@@ -103,15 +103,16 @@ const UkTaxReceipt = ({ data }) => {
             textAlign: "center",
             textTransform: "uppercase",
             textDecoration: "underline",
-            marginBottom: "5px",
+            marginBottom: "-14px",
+            fontSize:"15px"
           }}
         >
           GOVERNMENT OF UTTRAKHAND
         </h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "-12px" }}>
           Department of Transport
         </h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h3 style={{ textAlign: "center", fontSize: "12px" }}>
           Checkpost Tax e-Receipt
         </h3>
 
@@ -220,14 +221,13 @@ const UkTaxReceipt = ({ data }) => {
             padding: "5px",
           }}
         >
-          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={60} />
+          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={150} />
         </div>
       </div>
 
       <button
         onClick={downloadPDF}
         style={{
-          marginTop: "10px",
           padding: "8px 16px",
           fontSize: "14px",
           cursor: "pointer",

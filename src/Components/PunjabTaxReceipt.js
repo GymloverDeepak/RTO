@@ -85,37 +85,39 @@ const PunjabTaxReceipt = ({ data }) => {
         </div>
       {/* Adjusted Watermark Position (Top-Middle) & Darker */}
       <img
-          src={watermarkImage}
-          alt="Watermark"
-          style={{
-            position: "absolute",
-            width: "60%",
-            height: "auto",
-            left: "50%",
-            top: "5%", // Moved to the top middle
-            transform: "translateX(-50%)",
-            opacity: 0.3, // Darker watermark
-            zIndex: -1,
-          }}
-        />
+        src={watermarkImage}
+        alt="Watermark"
+        style={{
+          position: "absolute",
+          width: "40%", // Reduced size
+          height: "auto",
+          left: "50%",
+          top: "10%", // Adjusted position
+          transform: "translateX(-50%)",
+          opacity: 0.5, // Darker watermark
+          zIndex: -1,
+        }}
+      />
+
         <h2
           style={{
             textAlign: "center",
             textTransform: "uppercase",
             textDecoration: "underline",
-            marginBottom: "5px",
+            marginBottom: "-14px",
+            fontSize:"15px"
           }}
         >
           GOVERNMENT OF PUNJAB
         </h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h4 style={{ textAlign: "center", fontSize: "12px",marginBottom: "-12px"}}>
           Department of Transport
         </h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h3 style={{ textAlign: "center", fontSize: "12px"  }}>
           Checkpost Tax e-Receipt
         </h3>
 
-        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" ,paddingLeft:"10px" }}>
+        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "2px" ,paddingLeft:"10px" }}>
           <p><strong>Registration No :</strong>&nbsp; {data.registrationNo}</p>
           <p><strong>Receipt No :</strong> &nbsp;{data.receiptNo}</p>
           <p><strong>Payment Date :</strong>&nbsp; {data.paymentDate}</p>
@@ -220,14 +222,13 @@ const PunjabTaxReceipt = ({ data }) => {
             padding: "5px",
           }}
         >
-          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={60} />
+          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={150} />
         </div>
       </div>
 
       <button
         onClick={downloadPDF}
         style={{
-          marginTop: "10px",
           padding: "8px 16px",
           fontSize: "14px",
           cursor: "pointer",

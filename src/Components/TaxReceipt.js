@@ -103,19 +103,20 @@ const TaxReceipt = ({ data }) => {
             textAlign: "center",
             textTransform: "uppercase",
             textDecoration: "underline",
-            marginBottom: "5px",
+            marginBottom: "-14px",
+            fontSize:"15px"
           }}
         >
           GOVERNMENT OF HARYANA
         </h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "-12px" }}>
           Department of Transport
         </h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
+        <h3 style={{ textAlign: "center", fontSize: "12px" }}>
           Checkpost Tax e-Receipt
         </h3>
 
-        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" ,paddingLeft:"10px" }}>
+        <div style={{ textAlign: "left", fontSize: "12px",paddingLeft:"10px" }}>
           <p><strong>Registration No :</strong>&nbsp; {data.registrationNo}</p>
           <p><strong>Receipt No :</strong> &nbsp;{data.receiptNo}</p>
           <p><strong>Payment Date :</strong>&nbsp; {data.paymentDate}</p>
@@ -220,14 +221,13 @@ const TaxReceipt = ({ data }) => {
             padding: "5px",
           }}
         >
-          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={60} />
+          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={150} />
         </div>
       </div>
 
       <button
         onClick={downloadPDF}
         style={{
-          marginTop: "10px",
           padding: "8px 16px",
           fontSize: "14px",
           cursor: "pointer",
