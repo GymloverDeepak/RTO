@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+import PunjabTaxReceipt from "./PunjabTaxReceipt";
+import RjTaxReceipt from "./RjTaxReceipt";
 import TaxReceipt from "./TaxReceipt"; // Ensure correct path
+import UkTaxReceipt from "./UkTaxReceipt";
+import UpTaxReceipt from "./UpTaxReceipt";
 
 const numberToWords = (num) => {
   const a = [
@@ -38,12 +42,10 @@ const getCurrentDateTime = () => {
   }).replace(",", "");
 };
 
-// Format datetime for input (YYYY-MM-DDTHH:MM)
 const formatDateTimeForInput = (date) => {
   return date.toISOString().slice(0, 16);
 };
 
-// Convert date to AM/PM format
 const formatDateTimeForDisplay = (isoString) => {
   const date = new Date(isoString);
   return date.toLocaleString("en-GB", {
@@ -58,6 +60,7 @@ const formatDateTimeForDisplay = (isoString) => {
 };
 
 const TaxForm = () => {
+const [selectedTaxRegion, setSelectedTaxRegion] = useState("");
   const [formData, setFormData] = useState({
     registrationNo: "",
     receiptNo: "",
@@ -101,66 +104,71 @@ const TaxForm = () => {
     e.preventDefault();
     console.log("Form Submitted: ", formData);
   };
+  const handleRegionChange = (e) => {
+    setSelectedTaxRegion(e.target.value);
+  };
 
   return (
     <div style={{ maxWidth: "600px", margin: "auto" }}>
       <h2>Tax Receipt Form</h2>
       <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "10px" }}>
+          <label style={{ display: "block", fontWeight: "bold" }}>Tax Region:</label>
+          <select
+            name="taxRegion"
+            value={selectedTaxRegion}
+            onChange={handleRegionChange}
+            style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+          >
+            <option value="UP">UP TAX</option>
+            <option value="UTTARAKHAND">UTTARAKHAND TAX</option>
+            <option value="HARYANA">HARYANA TAX</option>
+            <option value="RAJASTHAN">RAJASTHAN TAX</option>
+            <option value="PUNJAB">PUNJAB TAX</option>
+          </select>
+        </div>
         {Object.keys(formData).map((key) => (
-          <div key={key} style={{ marginBottom: "10px" }}>
-            <label style={{ display: "block", fontWeight: "bold" }}>
-              {key.replace(/([A-Z])/g, " $1").trim()}:
-            </label>
-            {key === "taxStartDate" || key === "taxEndDate" ? (
-              <>
-                {/* Date Picker */}
+          key !== "taxRegion" && (
+            <div key={key} style={{ marginBottom: "10px" }}>
+              <label style={{ display: "block", fontWeight: "bold" }}>
+                {key.replace(/([A-Z])/g, " $1").trim()}:
+              </label>
+              {key === "taxStartDate" || key === "taxEndDate" ? (
                 <input
                   type="datetime-local"
                   name={key}
                   value={formData[key]}
                   onChange={handleChange}
-                  style={{
-                    width: "100%",
-                    padding: "8px",
-                    borderRadius: "4px",
-                    border: "1px solid #ccc",
-                  }}
+                  style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
                 />
-                
-              </>
-            ) : (
-              <input
-                type="text"
-                name={key}
-                value={formData[key]}
-                onChange={handleChange}
-                style={{
-                  width: "100%",
-                  padding: "8px",
-                  borderRadius: "4px",
-                  border: "1px solid #ccc",
-                }}
-                readOnly={key === "paymentDate" || key === "totalAmountWords"}
-              />
-            )}
-          </div>
+              ) : (
+                <input
+                  type="text"
+                  name={key}
+                  value={formData[key]}
+                  onChange={handleChange}
+                  style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                  readOnly={key === "paymentDate" || key === "totalAmountWords"}
+                />
+              )}
+            </div>
+          )
         ))}
         <button
           type="submit"
-          style={{
-            padding: "10px",
-            background: "blue",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
+          style={{ padding: "10px", background: "blue", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
         >
           Generate Receipt
         </button>
       </form>
       <br />
-      <TaxReceipt data={formData} />
+
+        {/* Conditionally Render Tax Receipt */}
+      {selectedTaxRegion === "UP" && <UpTaxReceipt data={formData} />}
+      {selectedTaxRegion === "UTTARAKHAND" && <UkTaxReceipt data={formData} />}
+      {selectedTaxRegion === "HARYANA" && <TaxReceipt data={formData} />}
+      {selectedTaxRegion === "RAJASTHAN" && <RjTaxReceipt data={formData} />}
+      {selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />}
     </div>
   );
 };

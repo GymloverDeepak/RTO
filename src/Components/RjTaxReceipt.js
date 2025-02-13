@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import watermarkImage from "../Logo.jpeg"; // Ensure correct path
+import watermarkImage from "../Rjlogo.jpg"; // Ensure correct path
 import { QRCodeCanvas } from "qrcode.react";
 
-const TaxReceipt = ({ data }) => {
+const RjTaxReceipt = ({ data }) => {
   const pdfRef = useRef();
   const formatReceivedDate = (dateString) => {
     const date = new Date(dateString);
@@ -106,7 +106,7 @@ const TaxReceipt = ({ data }) => {
             marginBottom: "5px",
           }}
         >
-          GOVERNMENT OF HARYANA
+          GOVERNMENT OF RAJASTHAN
         </h2>
         <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "5px" }}>
           Department of Transport
@@ -239,4 +239,4 @@ const TaxReceipt = ({ data }) => {
   );
 };
 
-export default TaxReceipt;
+export default RjTaxReceipt;
