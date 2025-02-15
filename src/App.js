@@ -24,11 +24,11 @@ function App() {
     totalAmountWords: "NINE HUNDRED ONLY"
 };
 
+
 {/* <TaxReceipt data={taxData} /> */}
 
   return (
     <div className="App">
-    {/* <TaxReceipt data={taxData} /> */}
     <TaxReceiptForm/>
     </div>
   );

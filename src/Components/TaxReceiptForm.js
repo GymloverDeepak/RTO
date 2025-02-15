@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MhTaxReceipt from "./MhTaxReceipt";
 import PunjabTaxReceipt from "./PunjabTaxReceipt";
 import RjTaxReceipt from "./RjTaxReceipt";
 import TaxReceipt from "./TaxReceipt"; // Ensure correct path
@@ -113,6 +114,7 @@ const [selectedTaxRegion, setSelectedTaxRegion] = useState("");
             <option value="HARYANA">HARYANA TAX</option>
             <option value="RAJASTHAN">RAJASTHAN TAX</option>
             <option value="PUNJAB">PUNJAB TAX</option>
+            <option value="MAHARASHTRA">MAHARASHTRA TAX</option>
           </select>
         </div>
         {Object.keys(formData).map((key) => (
@@ -156,7 +158,7 @@ const [selectedTaxRegion, setSelectedTaxRegion] = useState("");
       {selectedTaxRegion === "UTTARAKHAND" && <UkTaxReceipt data={formData} />}
       {selectedTaxRegion === "HARYANA" && <TaxReceipt data={formData} />}
       {selectedTaxRegion === "RAJASTHAN" && <RjTaxReceipt data={formData} />}
-      {selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />}
+      {selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />} {selectedTaxRegion === "MAHARASHTRA" && <MhTaxReceipt data={formData} />}
     </div>
   );
 };
