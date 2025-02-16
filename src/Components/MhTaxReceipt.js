@@ -152,7 +152,7 @@ const MhTaxReceipt = ({ data }) => {
             <p><strong>Payment Mode:</strong> ONLINE</p>
           </div>
         </div>
-        <h4 style={{ marginBottom: "5px" }}>Tax Details</h4>
+        {/* <h4 style={{ marginBottom: "5px" }}>Tax Details</h4> */}
         <table
           style={{
             width: "100%",
