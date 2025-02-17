@@ -22,21 +22,29 @@ const UpTaxReceipt = ({ data }) => {
   const taxEndDate = formatReceivedDate(data.taxEndDate);
   const downloadPDF = () => {
     const input = pdfRef.current;
-
-    html2canvas(input, { scale: 2, useCORS: true }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
+  
+    html2canvas(input, { scale: 1.5, useCORS: true }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg", 0.6); // Use JPEG & reduce quality
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      const regNo = data.registrationNo || "UNKNOWN"; // Fallback if empty
-  const lastFourDigits = regNo.slice(-4); // Get last 4 digits
-  const fileName = `${lastFourDigits}.pdf`; // Dynamic file name
+      let imgHeight = (canvas.height * pdfWidth) / canvas.width; // Maintain aspect ratio
   
-  pdf.save(fileName);
+      // Ensure the image fits within the PDF page
+      if (imgHeight > pdf.internal.pageSize.getHeight()) {
+        imgHeight = pdf.internal.pageSize.getHeight();
+      }
+  
+      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, imgHeight);
+      
+      // Dynamic file name using last 4 digits of registration number
+      const regNo = data.registrationNo || "UNKNOWN"; 
+      const lastFourDigits = regNo.slice(-4); 
+      const fileName = `${lastFourDigits}.pdf`; 
+  
+      pdf.save(fileName);
     });
   };
+  
 
   return (
     <div>
