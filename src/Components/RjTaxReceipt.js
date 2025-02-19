@@ -168,24 +168,42 @@ const RjTaxReceipt = ({ data }) => {
             fontSize: "12px",
           }}
         >
-          <thead>
-            <tr style={{ borderBottom: "1px solid #000" }}>
-              <th style={{ textAlign: "left", padding: "4px" }}>Particular</th>
-              <th style={{ padding: "4px" }}>Fees/Tax</th>
-              <th style={{ padding: "4px" }}>Fine</th>
-              <th style={{ padding: "4px" }}>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax ({taxStartDate} TO {taxEndDate})
-              </td>
-              <td style={{ padding: "4px" }}>{data.taxAmount}</td>
-              <td style={{ padding: "4px" }}>{data.fineAmount}</td>
-              <td style={{ padding: "4px" }}>{data.totalAmount}</td>
-            </tr>
-          </tbody>
+         <thead>
+    <tr style={{ border: "1px solid #000" }}>
+      <th style={{ textAlign: "left", padding: "4px", border: "1px solid #000" }}>
+        Particular
+      </th>
+      <th style={{ padding: "4px", border: "1px solid #000" }}>Fees/Tax</th>
+      <th style={{ padding: "4px", border: "1px solid #000" }}>Fine</th>
+      <th style={{ padding: "4px", border: "1px solid #000" }}>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{ border: "1px solid #000" }}>
+      <td style={{ textAlign: "left", padding: "4px", border: "1px solid #000" }}>
+        MV Tax ({taxStartDate} TO {taxEndDate})
+      </td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>{data.taxAmount || "0"}</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>0</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>{data.taxAmount || "0"}</td>
+    </tr>
+    <tr style={{ border: "1px solid #000" }}>
+      <td style={{ textAlign: "left", padding: "4px", border: "1px solid #000" }}>
+        Counter Signature Fee
+      </td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>{data.fineAmount || "0"}</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>0</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>{data.fineAmount || "0"}</td>
+    </tr>
+    <tr style={{ border: "1px solid #000" }}>
+      <td style={{ textAlign: "left", padding: "4px", border: "1px solid #000" }}>
+        Surcharge Fee
+      </td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>0</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>0</td>
+      <td style={{ padding: "4px", border: "1px solid #000" }}>0</td>
+    </tr>
+  </tbody>
         </table>
 
         <h3 style={{ textAlign: "left", fontSize: "12px", fontWeight: "normal" }}>

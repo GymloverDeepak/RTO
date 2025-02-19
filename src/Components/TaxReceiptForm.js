@@ -43,8 +43,8 @@ const TaxForm = () => {
     chassisNo: "",
     paymentMode: "ONLINE",
     taxMode: "Days", // Default value
-    taxStartDate: formatDateTimeForInput(new Date()),
-    taxEndDate: formatDateTimeForInput(new Date()),
+    taxStartDate: formatDateTimeForInput(new Date()) ||"",
+    taxEndDate: formatDateTimeForInput(new Date()) || "",
     vehicleType: "",
     vehicleClass: "",
     mobileNo: "",
