@@ -9,9 +9,9 @@ export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const users = [
-    { email: "teraBaap.com", password: "password123" },
-    { email: "TearFufa.com", password: "userpass" },
-    { email: "PagalYaar.com", password: "admin123" },
+    { email: "teraBaap.com", password: "password321" },
+    { email: "TearFufa.com", password: "passuser" },
+    { email: "PagalYaar.com", password: "admin321" },
   ];
 
   const handleLogin = () => {
