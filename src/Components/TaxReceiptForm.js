@@ -5,6 +5,7 @@ import RjTaxReceipt from "./RjTaxReceipt";
 import TaxReceipt from "./TaxReceipt"; // Ensure correct path
 import UkTaxReceipt from "./UkTaxReceipt";
 import UpTaxReceipt from "./UpTaxReceipt";
+import WbTaxReceipt from "./WbTaxReceipt";
 const numberToWords = (num) => {
   const a = [
     "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -93,6 +94,7 @@ const TaxForm = () => {
             style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
           >
             <option value="UP">UP TAX</option>
+            <option value="WESTBENGAL">WEST-BENGAL</option>
             <option value="UTTARAKHAND">UTTARAKHAND TAX</option>
             <option value="HARYANA">HARYANA TAX</option>
             <option value="RAJASTHAN">RAJASTHAN TAX</option>
@@ -200,6 +202,7 @@ const TaxForm = () => {
 {selectedTaxRegion === "UTTARAKHAND" && <UkTaxReceipt data={formData} />}
 {selectedTaxRegion === "HARYANA" && <TaxReceipt data={formData} />}
 {selectedTaxRegion === "RAJASTHAN" && <RjTaxReceipt data={formData} />}
+{selectedTaxRegion === "WESTBENGAL" && <WbTaxReceipt data={formData} />}
 {selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />} {selectedTaxRegion === "MAHARASHTRA" && <MhTaxReceipt data={formData} />}
     </div>
   );
