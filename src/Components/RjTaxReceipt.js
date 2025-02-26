@@ -145,7 +145,7 @@ const RjTaxReceipt = ({ data }) => {
             <p><strong>Mobile No.:</strong> &nbsp;{data.mobileNo}</p>
             <p><strong>Sleeper Cap.:</strong>&nbsp;{data.seatCapacity}</p>
             <p><strong>Bank Ref. No.:</strong>{data.bankRefrelNo}</p>
-            <p><strong>Service Type:</strong> Ordinary</p>
+            <p><strong>Service Type:</strong> {data.serviceType}</p>
             <p><strong>Permit Type:</strong> &nbsp;</p>
           </div>
 

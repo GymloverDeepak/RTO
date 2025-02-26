@@ -51,6 +51,7 @@ const TaxForm = () => {
     mobileNo: "",
     checkpostName: "",
     seatCapacity: "",
+    serviceType:"",
     bankRefrelNo: "",
     taxAmount: "",
     fineAmount: "",
