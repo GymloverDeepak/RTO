@@ -58,20 +58,52 @@ const TaxReceipt = ({ data = {} }) => {
           minHeight: "297mm",
         }}
       >
-        {/* Watermark */}
-        <img
-          src={watermarkImage}
-          alt="Watermark"
+         <div
           style={{
             position: "absolute",
-            width: "50%",
-            left: "50%",
-            top: "5%",
-            transform: "translateX(-50%)",
-            opacity: 0.3,
+            top: "0%",
+            fontSize: "19px",
+            fontWeight: "bold",
+            color: "rgba(0, 0, 0, 0.2)",
             zIndex: -1,
+            whiteSpace: "nowrap",
+            width: "100%",
+            height: "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "stretch",
+            lineHeight: "1.2",
+            paddingTop: "20px",
+            paddingLeft: "10px",
           }}
-        />
+        >
+          {[...Array(20)].map((_, index) => (
+            <div key={index} style={{ width: "100%", display: "flex" }}>
+              <span style={{ letterSpacing: "1px" }}>
+                {data.registrationNo} / {data.paymentDate}&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+              <span style={{ letterSpacing: "1px" }}>
+                {data.registrationNo} / {data.paymentDate}
+              </span>
+            </div>
+          ))}
+        </div>
+      {/* Adjusted Watermark Position (Top-Middle) & Darker */}
+      <img
+        src={watermarkImage}
+        alt="Watermark"
+        style={{
+          position: "absolute",
+          width: "40%", // Reduced size
+          height: "auto",
+          left: "50%",
+          top: "10%", // Adjusted position
+          transform: "translateX(-50%)",
+          opacity: 0.5, // Darker watermark
+          zIndex: -1,
+        }}
+      />
         <h2 style={{ textAlign: "center", textTransform: "uppercase", textDecoration: "underline", fontSize: "15px" }}>GOVERNMENT OF HARYANA</h2>
         <h4 style={{ textAlign: "center", fontSize: "12px" }}>Department of Transport</h4>
         <h3 style={{ textAlign: "center", fontSize: "12px" }}>Checkpost Tax e-Receipt</h3>
