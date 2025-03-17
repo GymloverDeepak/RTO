@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MhTaxReceipt from "./MhTaxReceipt";
 import PunjabTaxReceipt from "./PunjabTaxReceipt";
 import RjTaxReceipt from "./RjTaxReceipt";
+import Tamil from "./Tamil";
 import TaxReceipt from "./TaxReceipt"; // Ensure correct path
 import UkTaxReceipt from "./UkTaxReceipt";
 import UpTaxReceipt from "./UpTaxReceipt";
@@ -101,6 +102,7 @@ const TaxForm = () => {
             <option value="RAJASTHAN">RAJASTHAN TAX</option>
             <option value="PUNJAB">PUNJAB TAX</option>
             <option value="MAHARASHTRA">MAHARASHTRA TAX</option>
+            <option value="TAMIL">Tamil Nadu</option>
           </select>
         </div>
 
@@ -204,7 +206,9 @@ const TaxForm = () => {
 {selectedTaxRegion === "HARYANA" && <TaxReceipt data={formData} />}
 {selectedTaxRegion === "RAJASTHAN" && <RjTaxReceipt data={formData} />}
 {selectedTaxRegion === "WESTBENGAL" && <WbTaxReceipt data={formData} />}
-{selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />} {selectedTaxRegion === "MAHARASHTRA" && <MhTaxReceipt data={formData} />}
+{selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />}
+ {selectedTaxRegion === "MAHARASHTRA" && <MhTaxReceipt data={formData} />}
+ {selectedTaxRegion === "TAMIL" && <Tamil data={formData} />}
     </div>
   );
 };

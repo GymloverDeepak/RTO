@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import watermarkImage from "../Wb.png"; // Ensure correct path
+import watermarkImage from "../TamilNadu.svg.png"; // Ensure correct path
 import { QRCodeCanvas } from "qrcode.react";
 
-const WbTaxReceipt = ({ data }) => {
+const Tamil = ({ data }) => {
   const pdfRef = useRef();
   const formatReceivedDate = (dateString) => {
     const date = new Date(dateString);
@@ -93,19 +93,20 @@ const WbTaxReceipt = ({ data }) => {
         </div>
       {/* Adjusted Watermark Position (Top-Middle) & Darker */}
       <img
-          src={watermarkImage}
-          alt="Watermark"
-          style={{
-            position: "absolute",
-            width: "40%",
-            height: "auto",
-            left: "50%",
-            top: "5%", // Moved to the top middle
-            transform: "translateX(-50%)",
-            opacity: 0.5, // Darker watermark
-            zIndex: -1,
-          }}
-        />
+        src={watermarkImage}
+        alt="Watermark"
+        style={{
+          position: "absolute",
+          width: "40%", // Reduced size
+          height: "auto",
+          left: "50%",
+          top: "10%", // Adjusted position
+          transform: "translateX(-50%)",
+          opacity: 0.5, // Darker watermark
+          zIndex: -1,
+        }}
+      />
+
         <h2
           style={{
             textAlign: "center",
@@ -115,16 +116,16 @@ const WbTaxReceipt = ({ data }) => {
             fontSize:"15px"
           }}
         >
-          GOVERNMENT OF WEST BENGAL
+          TAMIL NADU
         </h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "-12px" }}>
+        <h4 style={{ textAlign: "center", fontSize: "12px",marginBottom: "-12px"}}>
           Department of Transport
         </h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px" }}>
+        <h3 style={{ textAlign: "center", fontSize: "12px"  }}>
           Checkpost Tax e-Receipt
         </h3>
 
-        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "5px" ,paddingLeft:"10px" }}>
+        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "2px" ,paddingLeft:"10px" }}>
           <p><strong>Registration No :</strong>&nbsp; {data.registrationNo}</p>
           <p><strong>Receipt No :</strong> &nbsp;{data.receiptNo}</p>
           <p><strong>Payment Date :</strong>&nbsp; {data.paymentDate}</p>
@@ -145,7 +146,7 @@ const WbTaxReceipt = ({ data }) => {
             <p><strong>Mobile No.:</strong> &nbsp;{data.mobileNo}</p>
             <p><strong>Sleeper Cap.:</strong>&nbsp;{data.seatCapacity}</p>
             <p><strong>Bank Ref. No.:</strong>{data.bankRefrelNo}</p>
-            <p><strong>Service Type:</strong>{data.serviceType}</p>
+            <p><strong>Service Type:</strong> {data.serviceType}</p>
             <p><strong>Permit Type:</strong> &nbsp;</p>
           </div>
 
@@ -247,4 +248,4 @@ const WbTaxReceipt = ({ data }) => {
   );
 };
 
-export default WbTaxReceipt;
+export default Tamil;
