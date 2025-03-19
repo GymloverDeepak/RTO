@@ -108,27 +108,50 @@ const TaxReceipt = ({ data = {} }) => {
         <h4 style={{ textAlign: "center", fontSize: "12px" }}>Department of Transport</h4>
         <h3 style={{ textAlign: "center", fontSize: "12px" }}>Checkpost Tax e-Receipt</h3>
 
-        <div style={{ textAlign: "left", fontSize: "12px", paddingLeft: "10px" }}>
-          <p><strong>Registration No:</strong> {data.registrationNo || "N/A"}</p>
-          <p><strong>Receipt No:</strong> {data.receiptNo || "N/A"}</p>
-          <p><strong>Payment Date:</strong> {data.paymentDate || "N/A"}</p>
-          <p><strong>Owner Name:</strong> {data.ownerName || "N/A"}</p>
+        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "2px" ,paddingLeft:"10px" }}>
+          <p><strong>Registration No : &nbsp; {data.registrationNo}</strong></p>
+          <p><strong>Receipt No :  &nbsp;{data.receiptNo}</strong></p>
+          <p><strong>Payment Date : &nbsp; {data.paymentDate}</strong></p>
+          <p><strong>Owner Name : &nbsp;{data.ownerName}</strong> </p>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", marginBottom: "5px" }}>
-          <div style={{ width: "50%", textAlign: "left", paddingLeft: "10px" }}>
-            <p><strong>Vehicle Type:</strong> {data.vehicleType || "N/A"}</p>
-            <p><strong>Mobile No.:</strong> {data.mobileNo || "N/A"}</p>
-            <p><strong>Bank Ref. No.:</strong> {data.bankRefrelNo || "N/A"}</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "12px",
+            marginBottom: "5px",
+          }}
+        >
+          {/* Left Section */}
+          <div style={{ width: "50%", textAlign: "left" ,paddingLeft:"10px" }}>
+          <p><strong>Chassis No.: {data.chassisNo}</strong> </p>
+            <p><strong>Vehicle Type:  &nbsp;{data.vehicleType}</strong></p>
+            <p><strong>Mobile No : &nbsp;{data.mobileNo}</strong> </p>
+            <p><strong>Sleeper Cap : &nbsp;{data.seatCapacity}</strong></p>
+            <p><strong>Bank Ref. No : {data.bankRefrelNo}</strong></p>
+            <p><strong>Service Type: {data.serviceType}</strong> </p>
+            <p><strong>Permit Type:</strong> &nbsp;</p>
           </div>
+
+          {/* Right Section */}
           <div style={{ width: "50%", textAlign: "left" }}>
-            <p><strong>Chassis No.:</strong> {data.chassisNo || "N/A"}</p>
-            <p><strong>Tax Mode:</strong> {data.taxMode || "N/A"}</p>
-            <p><strong>Vehicle Class:</strong> {data.vehicleClass || "N/A"}</p>
+            <p><strong>Tax Mode:{data.taxMode} </strong></p>
+            <p><strong>Vehicle Class: {data.vehicleClass}</strong></p>
+            <p><strong>Checkpost Name: {data.checkpostName}</strong></p>
+            <p><strong>Seat Cap(Ex.Driver):  {data.seatCapacity}</strong></p>
+            <p><strong>Payment Mode: ONLINE</strong> </p>
           </div>
         </div>
-
-        <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #000", fontSize: "12px" }}>
+        {/* <h4 style={{ marginBottom: "5px" }}>Tax Details</h4> */}
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            border: "1px solid #000",
+            fontSize: "12px",
+          }}
+        >
           <thead>
             <tr style={{ borderBottom: "1px solid #000" }}>
               <th style={{ textAlign: "left", padding: "4px" }}>Particular</th>
@@ -139,10 +162,12 @@ const TaxReceipt = ({ data = {} }) => {
           </thead>
           <tbody>
             <tr>
-              <td style={{ textAlign: "left", padding: "4px" }}>MV Tax ({taxStartDate} TO {taxEndDate})</td>
-              <td style={{ padding: "4px" }}>{data.taxAmount || "0"}</td>
-              <td style={{ padding: "4px" }}>{data.fineAmount || "0"}</td>
-              <td style={{ padding: "4px" }}>{data.totalAmount || "0"}</td>
+              <td style={{ textAlign: "left", padding: "4px" }}>
+                MV Tax   <strong>({taxStartDate} TO {taxEndDate})</strong>
+              </td>
+              <td style={{ padding: "4px" }}>{data.taxAmount}</td>
+              <td style={{ padding: "4px" }}>{data.fineAmount}</td>
+              <td style={{ padding: "4px" }}>{data.totalAmount}</td>
             </tr>
           </tbody>
         </table>

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import watermarkImage from "../Uplogo.svg"; // Ensure correct path
+import watermarkImage from "../HM.png"; // Ensure correct path
 import { QRCodeCanvas } from "qrcode.react";
 
-const UpTaxReceipt = ({ data }) => {
+const Hptax = ({ data }) => {
   const pdfRef = useRef();
   const formatReceivedDate = (dateString) => {
     const date = new Date(dateString);
@@ -93,19 +93,20 @@ const UpTaxReceipt = ({ data }) => {
         </div>
       {/* Adjusted Watermark Position (Top-Middle) & Darker */}
       <img
-          src={watermarkImage}
-          alt="Watermark"
-          style={{
-            position: "absolute",
-            width: "40%",
-            height: "auto",
-            left: "50%",
-            top: "5%", // Moved to the top middle
-            transform: "translateX(-50%)",
-            opacity: 0.5, // Darker watermark
-            zIndex: -1,
-          }}
-        />
+        src={watermarkImage}
+        alt="Watermark"
+        style={{
+          position: "absolute",
+          width: "40%", // Reduced size
+          height: "auto",
+          left: "50%",
+          top: "10%", // Adjusted position
+          transform: "translateX(-50%)",
+          opacity: 0.5, // Darker watermark
+          zIndex: -1,
+        }}
+      />
+
         <h2
           style={{
             textAlign: "center",
@@ -115,12 +116,12 @@ const UpTaxReceipt = ({ data }) => {
             fontSize:"15px"
           }}
         >
-          GOVERNMENT OF UTTAR PRADESH
+          HIMACHAL PRADESH
         </h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px", marginBottom: "-12px" }}>
+        <h4 style={{ textAlign: "center", fontSize: "12px",marginBottom: "-12px"}}>
           Department of Transport
         </h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px", }}>
+        <h3 style={{ textAlign: "center", fontSize: "12px"  }}>
           Checkpost Tax e-Receipt
         </h3>
 
@@ -247,4 +248,4 @@ const UpTaxReceipt = ({ data }) => {
   );
 };
 
-export default UpTaxReceipt;
+export default Hptax;

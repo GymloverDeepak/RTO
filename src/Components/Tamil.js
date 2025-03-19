@@ -126,10 +126,10 @@ const Tamil = ({ data }) => {
         </h3>
 
         <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "2px" ,paddingLeft:"10px" }}>
-          <p><strong>Registration No :</strong>&nbsp; {data.registrationNo}</p>
-          <p><strong>Receipt No :</strong> &nbsp;{data.receiptNo}</p>
-          <p><strong>Payment Date :</strong>&nbsp; {data.paymentDate}</p>
-          <p><strong>Owner Name :</strong> &nbsp;{data.ownerName}</p>
+          <p><strong>Registration No : &nbsp; {data.registrationNo}</strong></p>
+          <p><strong>Receipt No :  &nbsp;{data.receiptNo}</strong></p>
+          <p><strong>Payment Date : &nbsp; {data.paymentDate}</strong></p>
+          <p><strong>Owner Name : &nbsp;{data.ownerName}</strong> </p>
         </div>
 
         <div
@@ -142,22 +142,22 @@ const Tamil = ({ data }) => {
         >
           {/* Left Section */}
           <div style={{ width: "50%", textAlign: "left" ,paddingLeft:"10px" }}>
-            <p><strong>Vehicle Type:</strong> &nbsp;{data.vehicleType}</p>
-            <p><strong>Mobile No.:</strong> &nbsp;{data.mobileNo}</p>
-            <p><strong>Sleeper Cap.:</strong>&nbsp;{data.seatCapacity}</p>
-            <p><strong>Bank Ref. No.:</strong>{data.bankRefrelNo}</p>
-            <p><strong>Service Type:</strong> {data.serviceType}</p>
+          <p><strong>Chassis No.: {data.chassisNo}</strong> </p>
+            <p><strong>Vehicle Type:  &nbsp;{data.vehicleType}</strong></p>
+            <p><strong>Mobile No : &nbsp;{data.mobileNo}</strong> </p>
+            <p><strong>Sleeper Cap : &nbsp;{data.seatCapacity}</strong></p>
+            <p><strong>Bank Ref. No : {data.bankRefrelNo}</strong></p>
+            <p><strong>Service Type: {data.serviceType}</strong> </p>
             <p><strong>Permit Type:</strong> &nbsp;</p>
           </div>
 
           {/* Right Section */}
           <div style={{ width: "50%", textAlign: "left" }}>
-            <p><strong>Chassis No.:</strong> {data.chassisNo}</p>
-            <p><strong>Tax Mode:</strong>{data.taxMode}</p>
-            <p><strong>Vehicle Class:</strong>{data.vehicleClass}</p>
-            <p><strong>Checkpost Name:</strong>{data.checkpostName}</p>
-            <p><strong>Seat Cap(Ex.Driver):</strong> {data.seatCapacity}</p>
-            <p><strong>Payment Mode:</strong> ONLINE</p>
+            <p><strong>Tax Mode:{data.taxMode} </strong></p>
+            <p><strong>Vehicle Class: {data.vehicleClass}</strong></p>
+            <p><strong>Checkpost Name: {data.checkpostName}</strong></p>
+            <p><strong>Seat Cap(Ex.Driver):  {data.seatCapacity}</strong></p>
+            <p><strong>Payment Mode: ONLINE</strong> </p>
           </div>
         </div>
         {/* <h4 style={{ marginBottom: "5px" }}>Tax Details</h4> */}
@@ -180,7 +180,7 @@ const Tamil = ({ data }) => {
           <tbody>
             <tr>
               <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax ({taxStartDate} TO {taxEndDate})
+                MV Tax   <strong>({taxStartDate} TO {taxEndDate})</strong>
               </td>
               <td style={{ padding: "4px" }}>{data.taxAmount}</td>
               <td style={{ padding: "4px" }}>{data.fineAmount}</td>

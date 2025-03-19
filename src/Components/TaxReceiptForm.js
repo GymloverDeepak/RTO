@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Gjtax from "./Gjtax";
+import Hptax from "./Hptax";
 import MhTaxReceipt from "./MhTaxReceipt";
+import MpTax from "./MpTax";
 import PunjabTaxReceipt from "./PunjabTaxReceipt";
 import RjTaxReceipt from "./RjTaxReceipt";
 import Tamil from "./Tamil";
@@ -102,7 +105,10 @@ const TaxForm = () => {
             <option value="RAJASTHAN">RAJASTHAN TAX</option>
             <option value="PUNJAB">PUNJAB TAX</option>
             <option value="MAHARASHTRA">MAHARASHTRA TAX</option>
-            <option value="TAMIL">Tamil Nadu</option>
+            <option value="TAMIL">TAMIL NADU</option>
+            <option value="MP">MADHYA PRADESH</option>
+            <option value="HP">HIMACHAL PRADESH</option>
+            <option value="GJ">GUJARAT</option>
           </select>
         </div>
 
@@ -209,6 +215,9 @@ const TaxForm = () => {
 {selectedTaxRegion === "PUNJAB" && <PunjabTaxReceipt data={formData} />}
  {selectedTaxRegion === "MAHARASHTRA" && <MhTaxReceipt data={formData} />}
  {selectedTaxRegion === "TAMIL" && <Tamil data={formData} />}
+ {selectedTaxRegion === "MP" && <MpTax data={formData} />}
+ {selectedTaxRegion === "HP" && <Hptax data={formData} />}
+ {selectedTaxRegion === "GJ" && <Gjtax data={formData} />}
     </div>
   );
 };
