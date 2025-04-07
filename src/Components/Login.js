@@ -11,7 +11,7 @@ export default function Login() {
   const users = [
     { email: "gymloverhu", password: "gymlover" },
     { email: "gymloverdeepak", password: "gymlover" },
-    { email: "dogi", password: "jaanvar" },
+    { email: "ram", password: "ramji" },
   ];
 
   const handleLogin = () => {
@@ -44,22 +44,22 @@ export default function Login() {
           <h2 className="text-3xl font-semibold text-center text-gray-900 mb-6">Login</h2>
           {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
           <div className="mb-4">
-            {/* <input
+            <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-gray-100 placeholder-gray-500"
-            /> */}
+            />
           </div>
           <div className="mb-4">
-            {/* <input
+            <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-gray-100 placeholder-gray-500"
-            /> */}
+            />
           </div>
           <button
             onClick={handleLogin}
