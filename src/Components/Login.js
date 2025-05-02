@@ -7,14 +7,21 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [ip, setIp] = useState("");
   const users = [
     { email: "gymloverhu", password: "gymlover" },
     { email: "gymloverdeepak", password: "gymlover" },
-    { email: "ram", password: "ramji" },
+    { email: "shiv", password: "shivji" },
   ];
 
   const handleLogin = () => {
+    fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(data => {
+      setIp(data.ip);
+      alert("Welcome Dude : " + data.ip);
+    })
+    
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
@@ -71,8 +78,7 @@ export default function Login() {
             Don't have an account? <a href="#" className="text-blue-500 hover:underline">Sign up</a>
           </p>
           <p className="text-center text-gray-600 text-sm mt-4">
-            Kripya phle paise de mujhe sharminda na kre  ! 
-             {/* <a href="#" className="text-blue-500 hover:underline">Sign up</a> */}
+            Kripya phle paise de Phir Login kre  !  ip :- {ip}
           </p>
           <p className="text-center text-gray-600 text-sm mt-4">
             Welcome Back ! 
