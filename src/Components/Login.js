@@ -12,6 +12,7 @@ export default function Login() {
     { email: "gymloverhu", password: "gymlover" },
     { email: "gymloverdeepak", password: "gymlover" },
     { email: "shiv", password: "shivji" },
+    { email: "kauua", password: "rahul" },
   ];
 
   const handleLogin = () => {
