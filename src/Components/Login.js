@@ -9,10 +9,10 @@ export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ip, setIp] = useState("");
   const users = [
-    { email: "gymloverhu", password: "gymlover" },
-    { email: "gymloverdeepak", password: "gymlover" },
-    { email: "shiv", password: "shivji" },
-    { email: "kauua", password: "rahul" },
+    { email: "kallu", password: "kallu" },
+    { email: "deepak", password: "deepak" },
+    // { email: "shiv", password: "shivji" },
+    // { email: "kauua", password: "rahul" },
   ];
 
   const handleLogin = () => {
