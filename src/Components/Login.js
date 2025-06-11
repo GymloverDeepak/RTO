@@ -14,9 +14,9 @@ export default function Login() {
   const [captchaInput, setCaptchaInput] = useState("");
 
   const users = [
-    { email: "kallu", password: "kallu" },
-    { email: "deepak", password: "deepak" },
-    { email: "shiv", password: "shivji" },
+    { email: "gymlover", password: "gymlover" },
+    { email: "sona", password: "sona" },
+    { email: "sonali", password: "sonali" },
   ];
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function Login() {
       navigate("/");
       setError("");
     } else {
-      setError("Invalid email or password.");
+      setError("Majdoor hi keh d");
     }
   };
 
