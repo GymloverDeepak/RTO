@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./login.css";
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -8,25 +8,47 @@ export default function Login() {
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ip, setIp] = useState("");
+
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [captchaInput, setCaptchaInput] = useState("");
+
   const users = [
     { email: "kallu", password: "kallu" },
     { email: "deepak", password: "deepak" },
     { email: "shiv", password: "shivji" },
-    // { email: "kauua", password: "rahul" },
   ];
 
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    const a = Math.floor(Math.random() * 10);
+    const b = Math.floor(Math.random() * 10);
+    setNum1(a);
+    setNum2(b);
+    setCaptchaInput("");
+  };
+
   const handleLogin = () => {
-    fetch('https://api.ipify.org?format=json')
-    .then(res => res.json())
-    .then(data => {
-      setIp(data.ip);
-      alert("Welcome Dude : " + data.ip);
-    })
-    
     if (!email || !password) {
       setError("Please enter both email and password.");
       return;
     }
+
+    if (parseInt(captchaInput) !== num1 + num2) {
+      setError("CAPTCHA is incorrect.");
+      generateCaptcha();
+      return;
+    }
+
+    fetch("https://api.ipify.org?format=json")
+      .then((res) => res.json())
+      .then((data) => {
+        setIp(data.ip);
+        alert("Welcome Dude : " + data.ip);
+      });
 
     const user = users.find((u) => u.email === email && u.password === password);
     if (user) {
@@ -40,55 +62,53 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 to-indigo-300">
-    <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-200">
-      {isLoggedIn ? (
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-green-600">Welcome!</h2>
-          <p className="text-gray-700 mt-2">You are successfully logged in.</p>
-        </div>
-      ) : (
-        <div>
-          <h2 className="text-3xl font-semibold text-center text-gray-900 mb-6">Login</h2>
-          {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
-          <div className="mb-4">
+    <div className="login-container">
+      <div className="login-box">
+        {isLoggedIn ? (
+          <div className="welcome">
+            <h2>Welcome!</h2>
+            <p>You are successfully logged in.</p>
+          </div>
+        ) : (
+          <>
+            <h2>Login</h2>
+            {error && <p className="error">{error}</p>}
+
             <input
-              type="email"
-              placeholder="Email"
+              type="text"
+              placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-gray-100 placeholder-gray-500"
             />
-          </div>
-          <div className="mb-4">
+
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-gray-100 placeholder-gray-500"
             />
-          </div>
-          <button
-            onClick={handleLogin}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold p-3 rounded-lg shadow-lg transition duration-300 transform hover:scale-105"
-          >
-            Login
-          </button>
-          <p className="text-center text-gray-600 text-sm mt-4">
-            Don't have an account? <a href="#" className="text-blue-500 hover:underline">Sign up</a>
-          </p>
-          <p className="text-center text-gray-600 text-sm mt-4">
-            Kripya phle paise de Phir Login kre  !  ip :- {ip}
-          </p>
-          <p className="text-center text-gray-600 text-sm mt-4">
-            Welcome Back ! 
-             {/* <a href="#" className="text-blue-500 hover:underline">Sign up</a> */}
-          </p>
-        </div>
-      )}
+
+            <div className="captcha-box">
+              <label>
+                Solve CAPTCHA: <strong>{num1} + {num2} = ?</strong>
+              </label>
+              <input
+              style={{ width: "44%" ,marginTop: "10px"}}
+                type="number"
+                placeholder="Enter CAPTCHA answer"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+              />
+            </div>
+
+            <button onClick={handleLogin}>Login</button>
+
+            <p className="info">
+              Kripya phle paise de phir login kre! IP: <strong>{ip}</strong>
+            </p>
+          </>
+        )}
+      </div>
     </div>
-  </div>
-  
   );
 }
