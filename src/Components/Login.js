@@ -63,7 +63,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-box">
+      {/* <div className="login-box">
         {isLoggedIn ? (
           <div className="welcome">
             <h2>Welcome!</h2>
@@ -108,7 +108,8 @@ export default function Login() {
             </p>
           </>
         )}
-      </div>
+      </div> */}
+      <h2>Out of Service !</h2>
     </div>
   );
 }
