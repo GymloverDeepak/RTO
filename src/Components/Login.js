@@ -14,9 +14,9 @@ export default function Login() {
   const [captchaInput, setCaptchaInput] = useState("");
 
   const users = [
-    { email: "gymlover", password: "gymlover" },
-    { email: "sona", password: "sona" },
-    { email: "sonali", password: "sonali" },
+    { email: "kapil", password: "kapil" },
+    { email: "dev", password: "dev" },
+    { email: "loki", password: "loki" },
   ];
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      {/* <div className="login-box">
+      <div className="login-box">
         {isLoggedIn ? (
           <div className="welcome">
             <h2>Welcome!</h2>
@@ -108,8 +108,8 @@ export default function Login() {
             </p>
           </>
         )}
-      </div> */}
-      <h2>Out of Service !</h2>
+      </div>
+      {/* <h2>Out of Service !</h2> */}
     </div>
   );
 }
