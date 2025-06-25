@@ -15,7 +15,7 @@ export default function Login() {
 
   const users = [
     { email: "kapil", password: "kapil" },
-    { email: "deva", password: "deva" },
+    { email: "devan", password: "devan" },
     { email: "loki", password: "loki" },
   ];
 
