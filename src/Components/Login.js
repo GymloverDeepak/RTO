@@ -14,8 +14,8 @@ export default function Login() {
   const [captchaInput, setCaptchaInput] = useState("");
 
   const users = [
-    { email: "kapil", password: "kapil" },
-    { email: "devan", password: "devan" },
+    // { email: "kapil", password: "kapil" },
+    // { email: "devan", password: "devan" },
     { email: "loki", password: "loki" },
   ];
 
