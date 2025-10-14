@@ -16,7 +16,7 @@ export default function Login() {
   const users = [
     { email: "kapil", password: "kapil" },
     { email: "satish", password: "satish" },
-    { email: "pagal", password: "ladki" },
+    // { email: "pagal", password: "ladki" },
   ];
 
   useEffect(() => {
