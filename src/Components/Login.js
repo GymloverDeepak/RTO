@@ -17,7 +17,7 @@ export default function Login() {
     // { email: "kapil", password: "kapil" },
     // { email: "1satish", password: "1satish" },
     { email: "fitness", password: "fitness" },
-    { email: "gymlover", password: "gymlover" },
+    // { email: "gymlover", password: "gymlover" },
   ];
 
   useEffect(() => {
