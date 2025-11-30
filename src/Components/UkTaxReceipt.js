@@ -152,7 +152,7 @@ const UkTaxReceipt = ({ data }) => {
 
           {/* Right Section */}
           <div style={{ width: "50%", textAlign: "left" }}>
-            <p><strong>Tax Mode:{data.taxMode} </strong></p>
+            <p><strong>Tax Mode:{data.taxMode?.toUpperCase()} </strong></p>
             <p><strong>Vehicle Class: {data.vehicleClass}</strong></p>
             <p><strong>Checkpost Name: {data.checkpostName}</strong></p>
             <p><strong>Seat Cap(Ex.Driver):  {data.seatCapacity}</strong></p>
@@ -179,7 +179,7 @@ const UkTaxReceipt = ({ data }) => {
           <tbody>
             <tr>
               <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax   <strong>({taxStartDate} TO {taxEndDate})</strong>
+                MV Tax   <strong>({taxStartDate?.toUpperCase()} TO {taxEndDate?.toUpperCase()})</strong>
               </td>
               <td style={{ padding: "4px" }}>{data.taxAmount}</td>
               <td style={{ padding: "4px" }}>{data.fineAmount}</td>

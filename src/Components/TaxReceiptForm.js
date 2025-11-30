@@ -49,8 +49,8 @@ const TaxForm = () => {
     chassisNo: "",
     paymentMode: "ONLINE",
     taxMode: "Days", // Default value
-    taxStartDate: formatDateTimeForInput(new Date()) ||"",
-    taxEndDate: formatDateTimeForInput(new Date()) || "",
+    taxStartDate: (formatDateTimeForInput(new Date()) || "").toUpperCase(),
+    taxEndDate: (formatDateTimeForInput(new Date()) || "").toUpperCase(),
     vehicleType: "",
     vehicleClass: "",
     mobileNo: "",
@@ -156,12 +156,12 @@ const TaxForm = () => {
       onChange={handleChange}
       style={{ width: "100%", padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
     >
-      <option value="Days">Days</option>
-      <option value="Weekly">Weekly</option>
-      <option value="Monthly">Monthly</option>
-      <option value="Quarter">Quarter</option>
-      <option value="Half Year">Half Year</option>
-      <option value="Yearly">Yearly</option>
+      <option value="Days">DAYS</option>
+      <option value="Weekly">WEEKLY</option>
+      <option value="Monthly">MONTHLY</option>
+      <option value="Quarter">QUARTER</option>
+      <option value="Half Year">HALF YEAR</option>
+      <option value="Yearly">YEARLY</option>
     </select>
   </div>
 
