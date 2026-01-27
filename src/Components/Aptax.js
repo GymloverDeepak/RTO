@@ -180,7 +180,7 @@ const Aptax = ({ data }) => {
           <tbody>
             <tr>
               <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax   <strong>({taxStartDate} TO {taxEndDate})</strong>
+                MV Tax   <strong>({taxStartDate?.toUpperCase()} TO {taxEndDate?.toUpperCase()})</strong>
               </td>
               <td style={{ padding: "4px" }}>{data.taxAmount}</td>
               <td style={{ padding: "4px" }}>{data.fineAmount}</td>
