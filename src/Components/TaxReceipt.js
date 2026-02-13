@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import watermarkImage from "../Logo.jpeg"; // Ensure correct path
+import watermarkImage from "../HrNew.png"; // Ensure correct path
 import { QRCodeCanvas } from "qrcode.react";
 
 const TaxReceipt = ({ data = {} }) => {
@@ -27,158 +27,282 @@ const TaxReceipt = ({ data = {} }) => {
 
   const downloadPDF = () => {
     if (!pdfRef.current) return;
-    html2canvas(pdfRef.current, { scale: 1.5, useCORS: true }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/jpeg", 0.6);
+  
+    html2canvas(pdfRef.current, { scale: 2, useCORS: true }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/jpeg", 0.95);
+  
       const pdf = new jsPDF("p", "mm", "a4");
+  
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      let imgHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      if (imgHeight > pdf.internal.pageSize.getHeight()) {
-        imgHeight = pdf.internal.pageSize.getHeight();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+      // 🔥 30px margin
+      const margin = 9.26;  
+  
+      const usableWidth = pdfWidth - margin * 2;
+      const usableHeight = pdfHeight - margin * 2;
+  
+      let imgHeight = (canvas.height * usableWidth) / canvas.width;
+  
+      if (imgHeight > usableHeight) {
+        imgHeight = usableHeight;
       }
-
-      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, imgHeight);
+  
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        margin,   // left
+        margin,   // top
+        usableWidth,
+        imgHeight
+      );
+  
       const regNo = data.registrationNo || "UNKNOWN";
       const lastFourDigits = regNo.slice(-4);
       const fileName = `${lastFourDigits}.pdf`;
+  
       pdf.save(fileName);
     });
   };
+  
+  
 
   return (
     <div>
-      <div
-        ref={pdfRef}
-        style={{
-          position: "relative",
-          padding: "10px",
-          fontFamily: "Arial, sans-serif",
-          background: "#fff",
-          width: "210mm",
-          minHeight: "297mm",
-        }}
-      >
-         <div
-          style={{
-            position: "absolute",
-            top: "0%",
-            fontSize: "19px",
-            fontWeight: "bold",
-            color: "rgba(0, 0, 0, 0.2)",
-            zIndex: -1,
-            whiteSpace: "nowrap",
-            width: "100%",
-            height: "50%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "stretch",
-            lineHeight: "1.2",
-            paddingTop: "20px",
-            paddingLeft: "10px",
-          }}
-        >
-          {[...Array(20)].map((_, index) => (
-            <div key={index} style={{ width: "100%", display: "flex" }}>
-              <span style={{ letterSpacing: "1px" }}>
-                {data.registrationNo} / {data.paymentDate}&nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-              <span style={{ letterSpacing: "1px" }}>
-                {data.registrationNo} / {data.paymentDate}
-              </span>
-            </div>
-          ))}
-        </div>
-      {/* Adjusted Watermark Position (Top-Middle) & Darker */}
-      <img
-        src={watermarkImage}
-        alt="Watermark"
-        style={{
-          position: "absolute",
-          width: "40%", // Reduced size
-          height: "auto",
-          left: "50%",
-          top: "10%", // Adjusted position
-          transform: "translateX(-50%)",
-          opacity: 0.5, // Darker watermark
-          zIndex: -1,
-        }}
-      />
-        <h2 style={{ textAlign: "center", textTransform: "uppercase", textDecoration: "underline", fontSize: "15px" }}>GOVERNMENT OF HARYANA</h2>
-        <h4 style={{ textAlign: "center", fontSize: "12px" }}>Department of Transport</h4>
-        <h3 style={{ textAlign: "center", fontSize: "12px" }}>Checkpost Tax e-Receipt</h3>
+    <div
+  ref={pdfRef}
+  style={{
+    position: "relative",
+    padding: "25px",
+    fontFamily: "Arial",
+    background: "#fff",
+    width: "210mm",
+    minHeight: "297mm",
+    overflow: "hidden"
+  }}
+>
 
-        <div style={{ textAlign: "left", fontSize: "12px", marginBottom: "2px" ,paddingLeft:"10px" }}>
-          <p><strong>Registration No : &nbsp; {data.registrationNo}</strong></p>
-          <p><strong>Receipt No :  &nbsp;{data.receiptNo}</strong></p>
-          <p><strong>Payment Date : &nbsp; {data.paymentDate}</strong></p>
-          <p><strong>Owner Name : &nbsp;{data.ownerName}</strong> </p>
-        </div>
+{/* ===== repeating background text watermark ===== */}
+{/* ===== repeating background text watermark ===== */}
+<div
+  style={{
+    position: "absolute",
+    top: 0,
+    left: "25px",        // 🔥 SAME as container padding
+    width: "calc(100% - 50px)", // 🔥 left+right padding adjust
+    height: "100%",
+    fontSize: "18px",
+    color: "rgba(0,0,0,0.08)",
+    zIndex: 0,
+    lineHeight: "28px",
+    fontWeight: "bold",
+    margin: 0,
+    padding: 0,
+    textAlign: "left"
+  }}
+>
+  {[...Array(25)].map((_, i) => (
+    <div key={i}>
+      {data.registrationNo} {data.paymentDate} {data.registrationNo} {data.paymentDate}
+    </div>
+  ))}
+</div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            fontSize: "12px",
-            marginBottom: "5px",
-          }}
-        >
-          {/* Left Section */}
-          <div style={{ width: "50%", textAlign: "left" ,paddingLeft:"10px" }}>
-          <p><strong>Chassis No.: {data.chassisNo}</strong> </p>
-            <p><strong>Vehicle Type:  &nbsp;{data.vehicleType}</strong></p>
-            <p><strong>Mobile No : &nbsp;{data.mobileNo}</strong> </p>
-            <p><strong>Sleeper Cap : &nbsp;{data.seatCapacity}</strong></p>
-            <p><strong>Bank Ref. No : {data.bankRefrelNo}</strong></p>
-            <p><strong>Service Type: {data.serviceType}</strong> </p>
-            <p><strong>Permit Type:</strong> &nbsp;</p>
-          </div>
 
-          {/* Right Section */}
-          <div style={{ width: "50%", textAlign: "left" }}>
-            <p><strong>Tax Mode:{data.taxMode?.toUpperCase()} </strong></p>
-            <p><strong>Vehicle Class: {data.vehicleClass}</strong></p>
-            <p><strong>Checkpost Name: {data.checkpostName}</strong></p>
-            <p><strong>Seat Cap(Ex.Driver):  {data.seatCapacity}</strong></p>
-            <p><strong>Payment Mode: ONLINE</strong> </p>
-          </div>
-        </div>
-        {/* <h4 style={{ marginBottom: "5px" }}>Tax Details</h4> */}
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            border: "1px solid #000",
-            fontSize: "12px",
-          }}
-        >
-          <thead>
-            <tr style={{ borderBottom: "1px solid #000" }}>
-              <th style={{ textAlign: "left", padding: "4px" }}>Particular</th>
-              <th style={{ padding: "4px" }}>Fees/Tax</th>
-              <th style={{ padding: "4px" }}>Fine</th>
-              <th style={{ padding: "4px" }}>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={{ textAlign: "left", padding: "4px" }}>
-                MV Tax   <strong>({taxStartDate?.toUpperCase()} TO {taxEndDate?.toUpperCase()})</strong>
-              </td>
-              <td style={{ padding: "4px" }}>{data.taxAmount}</td>
-              <td style={{ padding: "4px" }}>{data.fineAmount}</td>
-              <td style={{ padding: "4px" }}>{data.totalAmount}</td>
-            </tr>
-          </tbody>
-        </table>
+{/* ===== BIG CENTER RED LOGO WATERMARK ===== */}
+<img
+  src={watermarkImage}
+  alt=""
+  style={{
+    position: "absolute",
+    width: "180px",
+    height: "250px",
+    top: "30%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    opacity: 0.35,
+    zIndex: 0
+  }}
+/>
 
-        <h3 style={{ textAlign: "left", fontSize: "12px" }}><strong>Grand Total:</strong> ₹ {data.totalAmount || "0"} /- ({data.totalAmountWords || "Zero"})</h3>
-        <p style={{ textAlign: "left", fontSize: "10px" }}><strong>Note:</strong> This is a computer-generated receipt; no signature is required.</p>
-        <p><strong>Scan the QR code for verification:</strong></p>
-        <div style={{ position: "absolute", top: "20px", right: "20px", background: "#fff", padding: "5px" }}>
-          <QRCodeCanvas value="https://kms.parivahan.gov.in" size={150} />
-        </div>
-      </div>
+{/* ===== QR CODE ===== */}
+{/* ===== HEADER ROW ===== */}
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "relative",
+    zIndex: 2,
+    marginBottom: "10px"
+  }}
+>
+
+  {/* LEFT SIDE GOVT LOGO */}
+  <img
+    src={watermarkImage}
+    style={{
+      width: 150,   // same size as QR
+      height: 170,
+      objectFit: "contain"
+    }}
+  />
+
+  {/* CENTER TEXT */}
+  <div style={{ textAlign: "center", flex: 1 }}>
+    <h2 style={{ margin: 0, fontSize: 18, fontWeight: "bold" }}>
+      GOVERNMENT OF HARYANA
+    </h2>
+    <div style={{ fontSize: 13 }}>Department of Transport</div>
+    <div style={{ fontSize: 13, fontWeight: "bold", marginTop: 4 }}>
+      Checkpost Tax e-Receipt
+    </div>
+  </div>
+
+  {/* RIGHT SIDE QR */}
+ <div style={{display:"flex", justifyContent:"flex-end", marginTop:10}}>
+  <QRCodeCanvas
+    value="https://kms.parivahan.gov.in"
+    size={150}
+    style={{marginRight:20}}   // 👉 right margin set
+  />
+</div>
+
+
+</div>
+
+
+{/* ===== INFO SECTION ===== */}
+<div 
+style={{ 
+  marginTop:10,
+  fontSize:11,
+  zIndex:2,
+  position:"relative",
+  color:"#222",
+  fontWeight:"bold",
+  lineHeight:"16px"   // 🔥 compact line height
+}}>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Registration No.</b> : {data.registrationNo}</p>
+<p style={{margin:2}}><b>Receipt No.</b> : {data.receiptNo}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Owner Name</b> : {data.ownerName}</p>
+<p style={{margin:2}}><b>Payment Date</b> : {data.paymentDate}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Chassis No.</b> : {data.chassisNo}</p>
+<p style={{margin:2}}><b>Tax Mode</b> : {data.taxMode}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Vehicle Type</b> : {data.vehicleType}</p>
+<p style={{margin:2}}><b>Vehicle Class</b> : {data.vehicleClass}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Mobile No.</b> : {data.mobileNo}</p>
+<p style={{margin:2}}><b>CheckPost Name</b> : {data.checkpostName}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Seating Capacity</b> : {data.seatCapacity}</p>
+<p style={{margin:2}}><b>Sleeper Cap</b> : {data.sleeperCap || 0}</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Bank Ref. No.</b> : {data.bankRefrelNo}</p>
+<p style={{margin:2}}><b>Payment Mode</b> : ONLINE</p>
+</div>
+
+<div style={{display:"flex",justifyContent:"space-between"}}>
+<p style={{margin:2}}><b>Service Type</b> : {data.serviceType}</p>
+<p style={{margin:2}}><b>Permit Type</b> : NOT APPLICABLE</p>
+</div>
+
+</div>
+
+
+{/* ===== TAX TABLE ===== */}
+<table style={{
+  width:"100%",
+  borderCollapse:"collapse",
+  marginTop:5,      // 🔥 table gap kam
+  fontSize:13,
+  zIndex:2,
+  position:"relative"
+}}>
+
+<thead>
+<tr style={{border:"1px solid #3f51b5"}}>
+<th style={{border:"1px solid #3f51b5",padding:6,textAlign:"left"}}>Tax/Fee Particular</th>
+<th style={{border:"1px solid #3f51b5",textAlign:"left"}}>Tax/Fees</th>
+<th style={{border:"1px solid #3f51b5",textAlign:"left"}}>Fine</th>
+<th style={{border:"1px solid #3f51b5",textAlign:"left"}}>Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style={{border:"1px solid #3f51b5",padding:6,textAlign:"left"}}>
+MV Tax ({taxStartDate} TO {taxEndDate})
+</td>
+
+<td style={{border:"1px solid #3f51b5",padding:6,}}>
+{data.taxAmount}
+</td>
+
+<td style={{border:"1px solid #3f51b5",padding:6}}>
+{data.fineAmount}
+</td>
+
+<td style={{border:"1px solid #3f51b5",padding:6}}>
+{data.totalAmount}
+</td>
+</tr>
+</tbody>
+</table>
+
+
+{/* ===== TOTAL ===== */}
+<p style={{marginTop:8,fontSize:13,textAlign:"left"}}>
+<b>Grand Total:</b> {data.totalAmount}/- ({data.totalAmountWords})
+</p>
+
+
+{/* ===== NOTE ===== */}
+<div style={{marginTop:12,fontSize:12,lineHeight:"18px",textAlign:"left"}}>
+<b>Note :</b>
+
+<div style={{marginTop:4,textAlign:"left"}}>
+<b>Terms and Conditions:</b>
+<ol style={{marginTop:4,paddingLeft:18}}>
+<li>This is a computer generated printout and no signature is required.</li>
+<li>Should not carry unlawful/unaccompanied goods.</li>
+<li>If any false information/discrepancies are found later, necessary action will be taken.</li>
+</ol>
+</div>
+</div>
+
+
+{/* ===== SCAN QR TEXT ===== */}
+<p
+  style={{
+    marginTop:20,
+    fontSize:18,
+    fontWeight:"bold",
+    textAlign:"left"
+  }}
+>
+Scan the QR code for genuinity of the receipt.
+</p>
+
+
+</div>
 
       <button onClick={downloadPDF} style={{ padding: "8px 16px", fontSize: "14px", cursor: "pointer" }}>Download PDF</button>
     </div>
