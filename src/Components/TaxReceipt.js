@@ -171,7 +171,6 @@ const TaxReceipt = ({ data = {} }) => {
           </div>
         </div>
 
-        {/* ===== INFO SECTION ===== */}
         <div
           style={{
             marginTop: 10,
@@ -180,7 +179,7 @@ const TaxReceipt = ({ data = {} }) => {
             position: "relative",
             color: "#222",
             fontWeight: "bold",
-            lineHeight: "16px", // 🔥 compact line height
+            lineHeight: "16px",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -209,7 +208,6 @@ const TaxReceipt = ({ data = {} }) => {
               <b>Tax Mode</b> : {data.taxMode}
             </p>
           </div>
-
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
               <b>Vehicle Type</b> : {data.vehicleType}
