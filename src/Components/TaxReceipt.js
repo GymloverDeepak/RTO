@@ -136,13 +136,15 @@ const TaxReceipt = ({ data = {} }) => {
         >
           {/* LEFT SIDE GOVT LOGO */}
           <img
-            src={watermarkImage}
-            style={{
-              width: 150, // same size as QR
-              height: 170,
-              objectFit: "contain",
-            }}
-          />
+  src={watermarkImage}
+  alt="Haryana Government Logo"   // 👈 add this
+  style={{
+    width: 150,
+    height: 170,
+    objectFit: "contain"
+  }}
+/>
+
 
           {/* CENTER TEXT */}
           <div style={{ textAlign: "center", flex: 1 }}>
