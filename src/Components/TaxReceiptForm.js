@@ -58,10 +58,17 @@ const TaxForm = () => {
     seatCapacity: "",
     serviceType:"",
     bankRefrelNo: "",
+    permitNumber:"",
+    permitValidity:"",
+    fitnessValidity:"",
+    puccValidity:"",
+    permitType:"",
     taxAmount: "",
     fineAmount: "",
+    amountCss: "",
     totalAmount: "",
     totalAmountWords: "",
+   
   });
 
   useEffect(() => {
