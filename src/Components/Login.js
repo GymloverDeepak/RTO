@@ -7,14 +7,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [ip, setIp] = useState("");
-
+  // const [ip, setIp] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [captchaInput, setCaptchaInput] = useState("");
 
   const users = [
-    // { email: "kapil", password: "kapil" },
+    { email: "kapil", password: "kapil" },
     // { email: "satish", password: "satish" },
     // { email: "fitness", password: "fitness" },
     // { email: "gymlover", password: "gymlover" },
@@ -33,38 +33,73 @@ export default function Login() {
     setCaptchaInput("");
   };
 
+  // const handleLogin = () => {
+  //   if (!email || !password) {
+  //     setError("Please enter both email and password.");
+  //     return;
+  //   }
+
+  //   if (parseInt(captchaInput) !== num1 + num2) {
+  //     setError("CAPTCHA is incorrect.");
+  //     generateCaptcha();
+  //     return;
+  //   }
+
+  //   fetch("https://api.ipify.org?format=json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setIp(data.ip);
+  //       alert("Welcome Dude : " + data.ip);
+  //     });
+
+  //   const user = users.find((u) => u.email === email && u.password === password);
+  //   if (user) {
+  //     setIsLoggedIn(true);
+  //     sessionStorage.setItem("user_token", JSON.stringify(user));
+  //     navigate("/");
+  //     setError("");
+  //   } else {
+  //     setError("Majdoor hi keh d");
+  //   }
+  // };
   const handleLogin = () => {
     if (!email || !password) {
       setError("Please enter both email and password.");
+      setShowModal(true);
       return;
     }
-
+  
     if (parseInt(captchaInput) !== num1 + num2) {
       setError("CAPTCHA is incorrect.");
+      setShowModal(true);
       generateCaptcha();
       return;
     }
-
-    fetch("https://api.ipify.org?format=json")
-      .then((res) => res.json())
-      .then((data) => {
-        setIp(data.ip);
-        alert("Welcome Dude : " + data.ip);
-      });
-
+  
     const user = users.find((u) => u.email === email && u.password === password);
+  
     if (user) {
       setIsLoggedIn(true);
       sessionStorage.setItem("user_token", JSON.stringify(user));
       navigate("/");
       setError("");
     } else {
-      setError("Majdoor hi keh d");
+      setError("Bhai Sahab Galat Details Mat Dalo ");
+      setShowModal(true);
     }
   };
-
   return (
     <div className="login-container">
+    {showModal && (
+  <div className="modal-overlay">
+    <div className="modal-box">
+      <h3>Error</h3>
+      <p>{error}</p>
+      <p>{error}</p>
+      <button onClick={() => setShowModal(false)}>Close</button>
+    </div>
+  </div>
+)}
       <div className="login-box">
         {isLoggedIn ? (
           <div className="welcome">
@@ -105,9 +140,9 @@ export default function Login() {
 
             <button onClick={handleLogin}>Login</button>
 
-            <p className="info">
+            {/* <p className="info">
               Kripya phle paise de phir login kre! IP: <strong>{ip}</strong>
-            </p>
+            </p> */}
           </>
         )}
       </div>
