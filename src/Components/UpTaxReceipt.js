@@ -8,6 +8,18 @@ const UpTaxReceipt = ({ data }) => {
   const pdfRef = useRef();
   const itemsPerRow = 4;
   const rows = 25;
+  const formatDate = (date) => {
+    return new Date(date)
+      .toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+      .toUpperCase();
+  };
   const formatDateTime = (dateString) => {
     if (!dateString) return "";
 
@@ -36,55 +48,64 @@ const UpTaxReceipt = ({ data }) => {
     return `${formattedDay}-${formattedMonth}-${formattedYear} ${formattedTime}`;
   };
   const paymentDate = formatDateTime(data.paymentDate);
-  const formatReceivedDate = (dateString) => {
-    const date = new Date(dateString);
+  // const formatReceivedDate = (dateString) => {
+  //   const date = new Date(dateString);
 
-    return date
-      .toLocaleString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })
-      .replace(",", "");
+  //   return date
+  //     .toLocaleString("en-GB", {
+  //       day: "2-digit",
+  //       month: "2-digit",
+  //       year: "numeric",
+  //       hour: "2-digit",
+  //       minute: "2-digit",
+  //       hour12: true,
+  //     })
+  //     .replace(",", "");
+  // };
+  const formatDateMv = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+  
+    return `${year}-${month}-${day}`;
   };
-  const taxStartDate = formatReceivedDate(data.taxStartDate);
-  const taxEndDate = formatReceivedDate(data.taxEndDate);
+  const taxStartDate = formatDateMv(data.taxStartDate);
+  const taxEndDate = formatDateMv(data.taxEndDate);
+
   const downloadPDF = () => {
     const input = pdfRef.current;
-  
+
     html2canvas(input, { scale: 1.5, useCORS: true }).then((canvas) => {
       const imgData = canvas.toDataURL("image/jpeg", 0.6);
-  
+
       const pdf = new jsPDF("p", "mm", "a4");
-  
+
       const margin = 8; // ≈ 30px
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-  
+
       const usableWidth = pageWidth - margin * 2;
-  
+
       let imgHeight = (canvas.height * usableWidth) / canvas.width;
-  
+
       if (imgHeight > pageHeight - margin * 2) {
         imgHeight = pageHeight - margin * 2;
       }
-  
+
       pdf.addImage(
         imgData,
         "JPEG",
-        margin,       // left margin
-        margin,       // top margin
-        usableWidth,  // width with margins
+        margin, // left margin
+        margin, // top margin
+        usableWidth, // width with margins
         imgHeight
       );
-  
+
       const regNo = data.registrationNo || "UNKNOWN";
       const lastFourDigits = regNo.slice(-4);
       const fileName = `${lastFourDigits}.pdf`;
-  
+
       pdf.save(fileName);
     });
   };
@@ -105,7 +126,29 @@ const UpTaxReceipt = ({ data }) => {
       >
         {/* ===== repeating background text watermark ===== */}
         {/* ===== repeating background text watermark ===== */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "12px",
+            marginBottom: "5px",
+            marginTop: "-10px",
+          }}
+        >
+          {/* LEFT - TIME */}
+          <div>{paymentDate}</div>
 
+          {/* CENTER - SOFTWARE NAME */}
+          <div style={{ textAlign: "center", fontWeight: "bold" }}>
+            CheckPost V4.7.0
+          </div>
+
+          {/* RIGHT - PRINTED ON */}
+          <div style={{ textAlign: "right" }}>
+            Printed on : {formatDate(new Date())}
+          </div>
+        </div>
         <div
           style={{
             position: "absolute",
@@ -144,10 +187,10 @@ const UpTaxReceipt = ({ data }) => {
           alt=""
           style={{
             position: "absolute",
-            width: "350px",
-            height: "350px",
+            width: "280px",
+            height: "280px",
             top: "30%",
-            left: "70%",
+            left: "50%",
             transform: "translate(-50%,-50%)",
             opacity: 0.45,
             zIndex: 0,
@@ -168,23 +211,23 @@ const UpTaxReceipt = ({ data }) => {
         >
           {/* LEFT SIDE GOVT LOGO */}
           <img
-  src={watermarkImage}
-  alt="Haryana Government Logo"
-  style={{
-    width: 150,
-    height: 150,
-    objectFit: "contain",
-    backgroundColor: "white",
-    padding: "5px"
-  }}
-/>
+            src={watermarkImage}
+            alt="Haryana Government Logo"
+            style={{
+              width: 120,
+              height: 120,
+              objectFit: "contain",
+              backgroundColor: "white",
+              padding: "5px",
+            }}
+          />
 
           {/* CENTER TEXT */}
           <div style={{ textAlign: "center", flex: 1 }}>
             <h2
               style={{
                 margin: 0,
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: "bold",
                 textAlign: "center",
               }}
@@ -197,22 +240,12 @@ const UpTaxReceipt = ({ data }) => {
                   marginBottom: "4px",
                 }}
               >
-                GOVERNMENT OF UTTAR
-              </span>
-
-              <br />
-
-              <span 
-                style={{
-                  borderBottom: "2px solid black",
-                  display: "inline-block",
-                  paddingBottom: "3px",
-                }}
-              >
-                PRADESH
+                GOVERNMENT OF UTTAR PRADESH
               </span>
             </h2>
-            <div style={{ fontSize: 13,fontWeight: "bold", }}>Department of Transport</div>
+            <div style={{ fontSize: 13, fontWeight: "bold" }}>
+              Department of Transport
+            </div>
             <div style={{ fontSize: 13, fontWeight: "bold", marginTop: 4 }}>
               Checkpost Tax e-Receipt
             </div>
@@ -256,7 +289,7 @@ const UpTaxReceipt = ({ data }) => {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            <b>Payment Initialization Date</b> : {data.paymentDate}
+              <b>Payment Initialization Date</b> : {data.paymentDate}
             </p>
             <p style={{ margin: 2 }}>
               <b>Owner Name</b> : {data.ownerName}
@@ -282,40 +315,34 @@ const UpTaxReceipt = ({ data }) => {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            
               <b>Vehicle Category.</b> : {data.vehicleCatogry}
             </p>
             <p style={{ margin: 2 }}>
-            <b>Mobile No.</b> : {data.mobileNo}
-             
+              <b>Mobile No.</b> : {data.mobileNo}
             </p>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            <b>CheckPost Name</b> : {data.checkpostName}
+              <b>CheckPost Name</b> : {data.checkpostName}
             </p>
             <p style={{ margin: 2 }}>
-            <b>Seating Capacity</b> : {data.seatCapacity}
-             
-            </p>
-          </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <p style={{ margin: 2 }}>
-            <b>Sleeper Cap</b> : {data.sleeperCap || 0}
-            
-            </p>
-            <p style={{ margin: 2 }}>
-            <b>Bank Ref. No.</b> : {data.bankRefrelNo}
-           
+              <b>Seating Capacity</b> : {data.seatCapacity}
             </p>
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            <b>Payment Mode</b> : ONLINE
-            
+              <b>Sleeper Cap</b> : {data.sleeperCap || 0}
+            </p>
+            <p style={{ margin: 2 }}>
+              <b>Bank Ref. No.</b> : {data.bankRefrelNo}
+            </p>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p style={{ margin: 2 }}>
+              <b>Payment Mode</b> : ONLINE
             </p>
             <p style={{ margin: 2 }}>
               <b>Permit Number</b> : {data.permitNumber}
@@ -323,7 +350,7 @@ const UpTaxReceipt = ({ data }) => {
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            <b>Permit Validity </b> : {data.permitValidity}\
+              <b>Permit Validity </b> : {data.permitValidity}\
             </p>
             <p style={{ margin: 2 }}>
               <b>Fitness Validity </b> : {data.fitnessValidity}
@@ -331,11 +358,10 @@ const UpTaxReceipt = ({ data }) => {
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p style={{ margin: 2 }}>
-            <b>Insurance Validity </b> : {data.insuranceValidity}
-              
+              <b>Insurance Validity </b> : {data.insuranceValidity}
             </p>
-            <p style={{ margin: 2 }}>\
-              <b>PUCC Validity</b> : {data.puccValidity}
+            <p style={{ margin: 2 }}>
+              \<b>PUCC Validity</b> : {data.puccValidity}
             </p>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -397,6 +423,8 @@ const UpTaxReceipt = ({ data }) => {
                   border: "1px solid #3f51b5",
                   padding: 6,
                   textAlign: "left",
+                  fontSize: "12px",
+                  fontWeight:"bold"
                 }}
               >
                 MV Tax ({taxStartDate} TO {taxEndDate})
@@ -406,10 +434,12 @@ const UpTaxReceipt = ({ data }) => {
                 {data.taxAmount}
               </td>
 
-              <td style={{ border: "1px solid #3f51b5", padding: 6 }}>{data.fineAmount}</td>
+              <td style={{ border: "1px solid #3f51b5", padding: 6 }}>
+                {data.fineAmount}
+              </td>
 
               <td style={{ border: "1px solid #3f51b5", padding: 6 }}>
-              {data.totalAmount}
+                {data.totalAmount}
               </td>
             </tr>
           </tbody>
